@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  destination:
+    namespace: argo-vcanadas
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kustomize-guestbook
+    repoURL: https://github.com/N3ptuN0zzz/iac-vcanadas.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
